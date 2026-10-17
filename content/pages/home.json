@@ -1,0 +1,59 @@
+{
+  "tr": {
+    "ctaMessage": "Merhaba, web sitenizden yazıyorum. ",
+    "hero": {
+      "eyebrow": "[[Sektör · şehir]]",
+      "title": "[[Ana başlık: tek bir net vaat]]",
+      "lead": "[[Bir iki cümle: kime hizmet veriyorsunuz ve ziyaretçi neden şimdi yazmalı]]",
+      "alt": "[[Fotoğrafta ne görünüyor]]",
+      "image": { "src": "/images/hero-1920.webp", "focus": "center" }
+    },
+    "services": {
+      "title": "[[Hizmetler]]",
+      "intro": "[[Hizmetlere kısa bir giriş]]",
+      "items": [
+        { "title": "[[Hizmet 1]]", "text": "[[Bir iki cümle]]" },
+        { "title": "[[Hizmet 2]]", "text": "[[Bir iki cümle]]" },
+        { "title": "[[Hizmet 3]]", "text": "[[Bir iki cümle]]" }
+      ]
+    },
+    "about": {
+      "title": "[[Hakkımızda başlığı]]",
+      "text": "[[İşletmenin hikâyesi: gerçek bilgiler, uydurma rakam veya ödül yok]]",
+      "alt": "[[Fotoğrafta ne görünüyor]]",
+      "image": { "src": "/images/about-1440.webp", "focus": "center" }
+    },
+    "contact": {
+      "title": "[[İletişim başlığı]]",
+      "text": "[[Ziyaretçiyi yazmaya davet eden bir cümle]]",
+      "address": ""
+    }
+  },
+  "en": {
+    "hero": {
+      "eyebrow": "[[Sector · city]]",
+      "title": "[[Headline: one clear promise]]",
+      "lead": "[[One or two sentences: who you serve and why the visitor should get in touch now]]",
+      "alt": "[[What the photo shows]]"
+    },
+    "services": {
+      "title": "[[Services]]",
+      "intro": "[[A short introduction to the services]]",
+      "items": [
+        { "title": "[[Service 1]]", "text": "[[One or two sentences]]" },
+        { "title": "[[Service 2]]", "text": "[[One or two sentences]]" },
+        { "title": "[[Service 3]]", "text": "[[One or two sentences]]" }
+      ]
+    },
+    "about": {
+      "title": "[[About title]]",
+      "text": "[[The business's story: real facts, no invented numbers or awards]]",
+      "alt": "[[What the photo shows]]"
+    },
+    "contact": {
+      "title": "[[Contact title]]",
+      "text": "[[One sentence inviting the visitor to get in touch]]",
+      "address": ""
+    }
+  }
+}

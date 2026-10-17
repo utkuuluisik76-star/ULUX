@@ -1,0 +1,202 @@
+# Decap CMS configuration: what the client can edit at /admin.
+# Every field maps to a value in /content/*.json; src/content/cms.ts reads and checks them at build
+# time. Layout, navigation and animations are deliberately NOT editable here.
+# Adding a field: README.md → "Een bewerkbaar veld toevoegen".
+
+# Editor interface language (Decap's own buttons). Labels and hints below are Turkish.
+locale: tr
+
+# Login through DecapBridge (decapbridge.com): editors are invited by e-mail and sign in with
+# Google, Microsoft or a password; no GitHub account needed. Fill in the repo and the site id from
+# the DecapBridge dashboard (README.md → "Nieuwe klant opzetten", step 5). The site id is not a
+# secret; the GitHub token stays in DecapBridge and never appears in this file.
+backend:
+  name: git-gateway
+  repo: TODO-github-account/TODO-repo
+  branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/TODO-decapbridge-site-id/pkce
+  auth_token_endpoint: /sites/TODO-decapbridge-site-id/token
+  gateway_url: https://gateway.decapbridge.com
+  # the editor's name in every commit message, so the history shows who changed what
+  commit_messages:
+    create: 'İçerik: {{collection}} „{{slug}}” oluşturuldu ({{author-name}})'
+    update: 'İçerik: {{collection}} „{{slug}}” güncellendi ({{author-name}})'
+    delete: 'İçerik: {{collection}} „{{slug}}” silindi ({{author-name}})'
+    uploadMedia: 'Fotoğraf yüklendi: {{path}} ({{author-name}})'
+    deleteMedia: 'Fotoğraf silindi: {{path}} ({{author-name}})'
+
+# Local testing: `npm run cms` + `npm run dev`, then http://localhost:3000/admin/index.html
+# (only used on localhost; the live site always uses the DecapBridge backend above).
+local_backend: true
+
+# site_url / display_url: the live domain once it exists (the "view site" link in the editor)
+# site_url: https://example.com
+# display_url: https://example.com
+
+# Uploaded photos go to public/uploads; every build turns them into responsive sizes.
+media_folder: public/uploads
+public_folder: /uploads
+
+publish_mode: simple
+
+i18n:
+  structure: single_file
+  locales: [tr, en]
+  default_locale: tr
+
+collections:
+  # ---------------------------------------------------------------- settings (one language)
+  - name: settings
+    label: Ayarlar
+    description: İletişim bilgileri. Sitenin her yerinde (menü, iletişim, WhatsApp butonları) kullanılır.
+    editor: { preview: false }
+    files:
+      - name: contact
+        label: İletişim bilgileri
+        file: content/settings.json
+        fields:
+          - label: Telefon
+            name: phone
+            widget: string
+            hint: 'Sitede görüneceği gibi yazın, ülke koduyla. Örnek: +90 501 234 56 78'
+            pattern: ['^\+[0-9 ]{8,}$', '+ ile başlayan, sadece rakam ve boşluk içeren bir numara yazın']
+          - label: WhatsApp numarası
+            name: whatsapp
+            widget: string
+            hint: 'Ülke koduyla, + ve boşluk olmadan. Örnek: 905012345678'
+            pattern: ['^[0-9]{10,15}$', 'Sadece rakam: ülke kodu + numara (10–15 hane)']
+          - label: E-posta
+            name: email
+            widget: string
+            required: false
+            hint: Boş bırakırsanız sitede gösterilmez.
+            pattern: ['^$|^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Geçerli bir e-posta adresi yazın']
+
+  # ---------------------------------------------------------------- pages (Turkish + English)
+  - name: pages
+    label: Sayfa metinleri
+    description: Sitedeki metinler, Türkçe ve İngilizce. Yazı düzeni ve tasarım burada değişmez.
+    editor: { preview: false }
+    i18n: true
+    files:
+      - name: seo
+        label: Google ve paylaşım
+        file: content/pages/seo.json
+        i18n: true
+        fields:
+          - { label: Sayfa başlığı (Google), name: title, widget: string, i18n: true, hint: 'Google sonuçlarında görünür, ~60 karakter. {year} yazarsanız her yıl otomatik güncellenir.' }
+          - { label: Açıklama (Google), name: description, widget: text, i18n: true, hint: '120–160 karakter.' }
+          - { label: Paylaşım başlığı, name: ogTitle, widget: string, i18n: true, hint: 'WhatsApp ve sosyal medyada link paylaşılınca görünen başlık.' }
+
+      - name: home
+        label: Ana sayfa
+        file: content/pages/home.json
+        i18n: true
+        fields:
+          - { label: WhatsApp mesajı, name: ctaMessage, widget: string, i18n: duplicate, hint: 'Ziyaretçi WhatsApp butonuna basınca hazır gelen mesaj (her zaman Türkçe).' }
+          - label: Giriş
+            name: hero
+            widget: object
+            i18n: true
+            fields:
+              - { label: Üst satır, name: eyebrow, widget: string, i18n: true }
+              - { label: Ana başlık (H1), name: title, widget: string, i18n: true }
+              - { label: Giriş metni, name: lead, widget: text, i18n: true }
+              - label: Fotoğraf
+                name: image
+                widget: object
+                hint: Yatay, en az 2400 px genişlik. Telefonda dikey kesilir.
+                fields:
+                  - { label: Dosya, name: src, widget: image }
+                  - { label: Odak noktası, name: focus, widget: select, default: center, options: [{ label: Orta, value: center }, { label: Üst, value: top }, { label: Alt, value: bottom }, { label: Sol, value: left }, { label: Sağ, value: right }] }
+              - { label: Fotoğraf açıklaması, name: alt, widget: string, i18n: true, hint: 'Görme engelli ziyaretçiler ve Google için: fotoğrafta ne görünüyor?' }
+          - label: Hizmetler
+            name: services
+            widget: object
+            i18n: true
+            fields:
+              - { label: Başlık, name: title, widget: string, i18n: true }
+              - { label: Giriş, name: intro, widget: text, i18n: true }
+              - label: Hizmetler
+                name: items
+                widget: list
+                i18n: true
+                min: 1
+                summary: '{{fields.title}}'
+                fields:
+                  - { label: Başlık, name: title, widget: string, i18n: true }
+                  - { label: Metin, name: text, widget: text, i18n: true }
+          - label: Hakkımızda
+            name: about
+            widget: object
+            i18n: true
+            fields:
+              - { label: Başlık, name: title, widget: string, i18n: true }
+              - { label: Metin, name: text, widget: text, i18n: true }
+              - label: Fotoğraf
+                name: image
+                widget: object
+                fields:
+                  - { label: Dosya, name: src, widget: image }
+                  - { label: Odak noktası, name: focus, widget: select, default: center, options: [{ label: Orta, value: center }, { label: Üst, value: top }, { label: Alt, value: bottom }, { label: Sol, value: left }, { label: Sağ, value: right }] }
+              - { label: Fotoğraf açıklaması, name: alt, widget: string, i18n: true }
+          - label: İletişim
+            name: contact
+            widget: object
+            i18n: true
+            fields:
+              - { label: Başlık, name: title, widget: string, i18n: true }
+              - { label: Metin, name: text, widget: text, i18n: true }
+              - { label: Adres, name: address, widget: text, i18n: true, required: false, hint: Boş bırakırsanız gösterilmez. }
+
+      - name: faq
+        label: Sık sorulan sorular
+        file: content/pages/faq.json
+        i18n: true
+        fields:
+          - { label: Başlık, name: title, widget: string, i18n: true }
+          - label: Sorular
+            name: items
+            widget: list
+            i18n: true
+            min: 1
+            summary: '{{fields.q}}'
+            fields:
+              - { label: Soru, name: q, widget: string, i18n: true }
+              - { label: Cevap, name: a, widget: text, i18n: true }
+
+      # Landing pages: one object per key in src/content/landing.ts (addresses are fixed there).
+      - name: landing
+        label: Ek sayfalar
+        file: content/pages/landing.json
+        i18n: true
+        fields:
+          - label: Örnek sayfa
+            name: example
+            widget: object
+            i18n: true
+            fields:
+              - { label: Sayfa başlığı (Google), name: metaTitle, widget: string, i18n: true, hint: '~60 karakter. {year} = bu yıl.' }
+              - { label: Açıklama (Google), name: metaDescription, widget: text, i18n: true, hint: '120–160 karakter.' }
+              - { label: Ana başlık (H1), name: h1, widget: string, i18n: true }
+              - { label: Giriş metni, name: intro, widget: text, i18n: true }
+              - label: Bölümler
+                name: sections
+                widget: list
+                i18n: true
+                min: 1
+                summary: '{{fields.title}}'
+                fields:
+                  - { label: Başlık, name: title, widget: string, i18n: true }
+                  - { label: Metin, name: text, widget: text, i18n: true }
+              - label: Sık sorulan sorular
+                name: faq
+                widget: list
+                i18n: true
+                min: 1
+                summary: '{{fields.q}}'
+                fields:
+                  - { label: Soru, name: q, widget: string, i18n: true }
+                  - { label: Cevap, name: a, widget: text, i18n: true }

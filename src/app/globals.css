@@ -1,0 +1,189 @@
+@import 'tailwindcss';
+
+/* ---------- Fonts: self-hosted subsets built by scripts/fonts.mjs (Turkish letters included) ----------
+   Swap the families per client: change scripts/fonts.mjs, run `npm run fonts`, then update the
+   @font-face rules below, the preloads in src/components/Document.tsx and the metric-matched fallback. */
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-latin.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-201E, U+2022, U+2026, U+20AC, U+2190-2193, U+00D7;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-tr.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-italic-latin.woff2') format('woff2');
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-201E, U+2022, U+2026;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-italic-tr.woff2') format('woff2');
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F;
+}
+/* Metric-matched fallback: text keeps its size while the web font loads (no layout shift). */
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 102%;
+}
+
+/* ---------- Design tokens: set these per client ----------
+   Text colours must reach 4.5:1 on the surface they sit on (check every pair you change). */
+@theme {
+  --color-bg: #f4f1ea; /* page surface */
+  --color-surface: #ebe6dc; /* alternate sections, cards */
+  --color-ink: #161513; /* body text, ≈16:1 on bg */
+  --color-mute: #5d5a53; /* secondary text, ≈6:1 on bg */
+  --color-accent: #1d3a4a; /* primary action, ≈11:1 with white text */
+  --color-accent-ink: #ffffff;
+  --color-line: rgb(22 21 19 / 0.12);
+  --color-line-strong: rgb(22 21 19 / 0.3);
+
+  --font-sans: 'Archivo', 'Archivo Fallback', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --header: 4rem;
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip; /* clip, not hidden: hidden would break position: sticky */
+}
+body {
+  min-height: 100svh;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  background: var(--color-bg);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+img {
+  max-width: 100%;
+}
+
+/* ---------- Typography ----------
+   display: the tight line height lets descenders (g, y, ş, ç) hang below the heading's box. Inside
+   anything that clips at its edge (content-visibility: auto, contain: paint, overflow: hidden) give
+   the last heading padding-bottom ≈ 0.22em, or the tails are cut off (seen on Pamukkale, 2026-10). */
+@utility display {
+  font-weight: 800;
+  font-stretch: 82%;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+@utility accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: 100%;
+  letter-spacing: -0.01em;
+}
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--color-ink);
+  color: var(--color-bg);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* Anchor targets land below the fixed header. */
+[id] {
+  scroll-margin-top: calc(var(--header) + 0.5rem);
+}
+
+/* ---------- Motion layout ----------
+   .motion is set on <html> by the boot script before first paint (see Document.tsx) and only
+   when motion is allowed. Scenes never run without it, so everything here must also look right
+   without .motion (the static layout). Large scrubbed layers get will-change only while active. */
+.motion [data-parallax] {
+  will-change: transform;
+}
+
+/* Lenis (smooth scroll for mouse/trackpad only). Its stylesheet is inlined so the library can load on demand. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Content still to be filled in ([[...]] in the content files). Deliberately loud. */
+.todo {
+  display: inline;
+  padding: 0.05em 0.35em;
+  border-radius: 2px;
+  background: #ffd60a;
+  color: #0a0a0a;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0;
+  text-transform: none;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

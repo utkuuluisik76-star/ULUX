@@ -1,0 +1,32 @@
+{
+  "tr": {
+    "example": {
+      "metaTitle": "[[Arama terimi: örn. Bodrum villa kiralama {year}]]",
+      "metaDescription": "[[120–160 karakter]]",
+      "h1": "[[Sayfa başlığı: arama terimiyle aynı dil]]",
+      "intro": "[[Giriş: ziyaretçinin sorusuna ilk cümlede cevap verin]]",
+      "sections": [
+        { "title": "[[Bölüm 1]]", "text": "[[Metin]]" },
+        { "title": "[[Bölüm 2]]", "text": "[[Metin]]" }
+      ],
+      "faq": [
+        { "q": "[[Soru]]", "a": "[[Cevap]]" }
+      ]
+    }
+  },
+  "en": {
+    "example": {
+      "metaTitle": "[[Search term: e.g. Bodrum villa rental {year}]]",
+      "metaDescription": "[[120–160 characters]]",
+      "h1": "[[Page title: same wording as the search term]]",
+      "intro": "[[Intro: answer the visitor's question in the first sentence]]",
+      "sections": [
+        { "title": "[[Section 1]]", "text": "[[Text]]" },
+        { "title": "[[Section 2]]", "text": "[[Text]]" }
+      ],
+      "faq": [
+        { "q": "[[Question]]", "a": "[[Answer]]" }
+      ]
+    }
+  }
+}

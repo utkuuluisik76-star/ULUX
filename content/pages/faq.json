@@ -1,0 +1,18 @@
+{
+  "tr": {
+    "title": "Sık sorulan sorular",
+    "items": [
+      { "q": "[[Soru 1]]", "a": "[[Cevap 1]]" },
+      { "q": "[[Soru 2]]", "a": "[[Cevap 2]]" },
+      { "q": "[[Soru 3]]", "a": "[[Cevap 3]]" }
+    ]
+  },
+  "en": {
+    "title": "Frequently asked questions",
+    "items": [
+      { "q": "[[Question 1]]", "a": "[[Answer 1]]" },
+      { "q": "[[Question 2]]", "a": "[[Answer 2]]" },
+      { "q": "[[Question 3]]", "a": "[[Answer 3]]" }
+    ]
+  }
+}

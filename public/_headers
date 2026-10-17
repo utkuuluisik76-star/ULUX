@@ -1,0 +1,29 @@
+# Response headers (copied into the build as /_headers; Cloudflare Pages and Netlify use the same format)
+
+# Hashed build files never change: cache them for a year.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts and photos keep their names when updated: cache for 30 days.
+/fonts/*
+  Cache-Control: public, max-age=2592000
+/images/*
+  Cache-Control: public, max-age=2592000
+
+# Content editor: always load the latest config, never index it.
+/admin/*
+  Cache-Control: no-cache
+  X-Robots-Tag: noindex, nofollow
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# The project's own Cloudflare addresses (<project>.pages.dev and preview deploys) serve the same
+# site as the real domain: keep them out of search results. Put the Cloudflare Pages project
+# name in place of the placeholder below.
+https://TODO-project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.TODO-project.pages.dev/*
+  X-Robots-Tag: noindex
