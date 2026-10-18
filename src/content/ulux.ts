@@ -2,7 +2,7 @@ export type UluxLocale = 'tr' | 'en';
 
 export const ulux = {
   tr: {
-    title: 'ULUX — İlk bakış', description: 'Krem tonları. Koyu yeşil bir imza. ULUX şapka tasarım konsepti.',
+    title: 'ULUX — İlk bakış', description: 'Krem tonları. Koyu yeşil bir imza. ULUX’un ilk şapkası.',
     skip: 'İçeriğe geç', cap: 'Şapka', detail: 'Detay', explore: 'Yakından bak',
     introScroll: 'Şapkayı görmek için kaydır',
     preorder: 'Ön sipariş talebi', preorderTitle: 'Ön sipariş için bize yazın.',
@@ -22,12 +22,12 @@ export const ulux = {
     chapter: 'İmzanın yakınına', heading: 'Küçük detay.\nBelirgin karakter.',
     body: 'Krem zemin üzerinde koyu yeşil nakış. ULUX yaprağı ve ismi, şapkanın yan tarafında bir araya geliyor.',
     caption: 'Krem / Orman yeşili', stitch: 'Yan nakış', next: 'İlk bakışa dön',
-    concept: 'Tasarım konsepti · Farklı açılar ve iç yapı, ürün mock-up’ından türetilmiştir.',
+    concept: 'ULUX’un ilk şapkası · Görseller ürün mock-up’ıdır; farklı açılar ve iç yapı bu mock-up’tan türetilmiştir.',
     alt: 'Krem renkli ULUX şapka, yan tarafında koyu yeşil yaprak ve ULUX nakışı',
     detailAlt: 'ULUX yaprak ve harf nakışının krem kumaş üzerindeki yakın planı',
   },
   en: {
-    title: 'ULUX — A first look', description: 'Cream tones. A forest-green signature. An ULUX cap design concept.',
+    title: 'ULUX — A first look', description: 'Cream tones. A forest-green signature. The first ULUX cap.',
     skip: 'Skip to content', cap: 'The cap', detail: 'The detail', explore: 'Take a closer look',
     introScroll: 'Scroll to the cap',
     preorder: 'Pre-order enquiry', preorderTitle: 'Ask about a pre-order.',
@@ -47,7 +47,7 @@ export const ulux = {
     chapter: 'A closer look', heading: 'Small detail.\nDistinct character.',
     body: 'Forest-green embroidery on a cream canvas. The ULUX leaf and wordmark sit together on the side of the cap.',
     caption: 'Cream / Forest green', stitch: 'Side embroidery', next: 'Back to the first look',
-    concept: 'Design concept · Additional angles and interior are derived from the product mock-up.',
+    concept: 'The first ULUX cap · Images are product mock-ups; additional angles and the interior are derived from them.',
     alt: 'Cream ULUX cap with a forest-green leaf and ULUX embroidery on the side',
     detailAlt: 'Close-up of the ULUX leaf and letter embroidery on cream fabric',
   },

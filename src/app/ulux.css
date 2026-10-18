@@ -137,6 +137,8 @@ a:focus-visible{outline:2px solid currentColor;outline-offset:5px}
 .cap-controls button:disabled{cursor:wait;opacity:.5}
 @media(max-width:899px){.hero-product{width:66vw;top:32%}.cap-controls{gap:.7rem}}
 @media(max-width:599px){.hero-product{width:80vw;top:33%}.cap-scene-ready .cap-controls{left:1.25rem;right:1.25rem;justify-content:space-between}.cap-angle-buttons>span{min-width:5.8rem;font-size:.6rem}}
+/* Desktop: the angle controls sit centred in the foot row, clear of every cap view (short laptop screens included). */
+@media(min-width:900px){.cap-scene-ready .cap-controls{left:50%;right:auto;bottom:calc(1.5rem - 4.5px);transform:translateX(-50%);white-space:nowrap}}
 /* Opening: a white leaf on forest green, then the unchanged product beneath it. */
 .cap-stage-content{position:absolute;inset:0;padding:inherit;display:flex;flex-direction:column;justify-content:space-between}
 .leaf-intro{display:none}
